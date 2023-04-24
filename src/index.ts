@@ -38,7 +38,7 @@ const parse = async (url = 'https://dev.amidstyle.com'): Promise<string> => {
 
     const obj = JSON.parse(textContent);
 
-    const sign = obj.sign;
+    const sign = obj?.sign;
 
     if (!sign) throw new Error('Not found sign');
 
