@@ -1,10 +1,12 @@
 import puppeteer from 'puppeteer-extra';
 import StealthPlugin from 'puppeteer-extra-plugin-stealth';
 
-puppeteer.use(StealthPlugin());
+const parse = async (
+  url: string = 'https://dev.amidstyle.com',
+): Promise<string> => {
+  const puppeteerWithPlugin = puppeteer.use(StealthPlugin());
 
-const parse = async (url = 'https://dev.amidstyle.com'): Promise<string> => {
-  const browser = await puppeteer.launch({
+  const browser = await puppeteerWithPlugin.launch({
     headless: 'new',
   });
 
@@ -48,9 +50,9 @@ const parse = async (url = 'https://dev.amidstyle.com'): Promise<string> => {
 
     return JSON.stringify(newObj);
   } catch (error) {
-    await browser.close();
-
     throw new Error(error);
+  } finally {
+    await browser.close();
   }
 };
 
