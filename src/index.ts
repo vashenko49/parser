@@ -3,18 +3,6 @@ import StealthPlugin from 'puppeteer-extra-plugin-stealth';
 
 puppeteer.use(StealthPlugin());
 
-function isJSON(jsonString: string): boolean {
-  try {
-    const json = JSON.parse(jsonString);
-    if (json && typeof json === 'object') {
-      return true;
-    }
-  } catch (e) {
-    console.error('Error parsing JSON:', e);
-  }
-  return false;
-}
-
 const parse = async (url = 'https://dev.amidstyle.com'): Promise<string> => {
   const browser = await puppeteer.launch({
     headless: 'new',
